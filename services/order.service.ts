@@ -1,5 +1,6 @@
 const user_service = require('./user.service')
 const { orderModel } = require('../models/order')
+import { Order } from "../classes/order"
 const getOrders = (req: any) => {
   if (user_service.isManager(req))
     return orderModel.find()
@@ -25,6 +26,13 @@ const updateOrder =async(orderDate:Date,orderUser:User,order:Order)=>{
     hour:order.date.getHours()
   })
 }
-const deleteOrder =async(orderDate:Date,orderUser:User,order:Order)=>{
+const deleteOrder =async(orderDate:Date,orderUser:User)=>{
   await orderModel.deleteOne({ user:orderUser, date:new Date(orderDate.getFullYear(), orderDate.getMonth(), orderDate.getDay())} )
+}
+module.exports = {
+  getOrders,
+  getOrdersByDate,
+  addOrder,
+  updateOrder,
+  deleteOrder
 }

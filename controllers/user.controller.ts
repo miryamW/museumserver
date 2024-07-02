@@ -16,12 +16,12 @@ router.post('/signup', async (req: { body: { id: any; name: any; password: any; 
   res.status(409)
 })
 
-router.get('/credits',async(req: { params: { name: string; password: string } }, res: { sendStatus: (arg0: number) => void; send: (arg0: { token: any }) => void }) => {
+router.get('/credits/:name/:password',async(req: { params: { name: string; password: string } }, res: { sendStatus: (arg0: number) => void; send: (arg0: { token: any }) => void }) => {
   const {name,password} = req.params
   res.send(await userService.getUserCredit(name,password));
 })
 
-router.put('/credits',async(req: { params: { name: string; password: string } ,body:{credits:number}}, res: { sendStatus: (arg0: number) => void; send:(s:string)=>void}) => {
+router.put('/credits/:name/:password',async(req: { params: { name: string; password: string } ,body:{credits:number}}, res: { sendStatus: (arg0: number) => void; send:(s:string)=>void}) => {
   const {name,password} = req.params
   const {credits} = req.body
   if(await userService.updateUserCredit(name,password,credits))
@@ -29,7 +29,7 @@ router.put('/credits',async(req: { params: { name: string; password: string } ,b
   res.sendStatus(404)
 })
 
-router.get('/users',async(req: any,res: { send: (arg0: any) => void })=>{
+router.get('/',async(req: any,res: { send: (arg0: any) => void })=>{
   res.send(await userService.getUsers())
 })
 

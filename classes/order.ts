@@ -1,4 +1,4 @@
-class Order{
+export class Order{
   date:Date
   user:User
   cardsCount: number
@@ -8,3 +8,4 @@ class Order{
     this.cardsCount = cardsCount
   }
 }
+module.exports = Order
